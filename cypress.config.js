@@ -5,6 +5,7 @@ module.exports = defineConfig({
 
   e2e: {
     baseUrl: "https://telnyx.com",
+      projectId: '29mik8',  
     
     viewportWidth: 1440,
     viewportHeight: 900,
