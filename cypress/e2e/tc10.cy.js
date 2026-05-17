@@ -14,7 +14,7 @@
 // - Homepage content is visible
 // ============================================================
 
-describe('TC-08 | Browser Back Navigation Works', () => {
+describe('TC-10 | Browser Back Navigation Works', () => {
 
   it('Back button returns user to homepage from /pricing', () => {
 
