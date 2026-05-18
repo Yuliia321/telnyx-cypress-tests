@@ -1,5 +1,3 @@
-/// <reference types="cypress" />
-
 // ============================================================
 // TC-01 | Verify Navigation Dropdown Opens
 // ============================================================
@@ -7,14 +5,14 @@
 // STEPS:
 // 1. Open homepage
 // 2. Hover over Products in top navigation
-// 3. Verify product links become visible
-// 4. Verify dropdown contains links
+// 3. Verify product cards are visible on screen (Voice AI, Voice API, Inference, Mobile Voice)
+// 4. Verify dropdown contains product links
 // 5. Verify all links have valid href
 //
 // EXPECTED RESULT:
-// - Products dropdown is displayed
-// - Product links are visible
-// - Each link has valid href
+// - Dropdown is displayed after click
+//- All 4 product cards are visible
+//- Each link has a valid href and does not equal #
 // ============================================================
 
 describe('TC-01 | Navigation Dropdown Opens', () => {

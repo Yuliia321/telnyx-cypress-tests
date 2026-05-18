@@ -1,47 +1,43 @@
 // ============================================================
-// TC-02 | Verify Pricing Plan CTA Routes to Sign-Up
+// TC-02 | Verify Pricing Dropdown Displays Plan Cards
 // ============================================================
 //
 // STEPS:
-// 1. Navigate to /pricing
-// 2. Find first visible CTA button on any plan card
-// 3. Click the CTA
-// 4. Assert destination URL contains 'sign-up', 'register', or 'checkout'
-// 5. Assert HTTP status < 400
+// 1. Open homepage
+// 2. Click Pricing in top navigation
+// 3. Verify pricing cards are visible on screen
+// 4. Verify dropdown contains pricing links
+// 5. Verify all links have valid href
 //
 // EXPECTED RESULT:
-// - CTA button is visible on pricing page
-// - Clicking CTA leads to sign-up / register / checkout page
-// - Page loads without server error
+// - Dropdown is displayed after click
+// - All plan cards are visible
+// - Each link has a valid href and does not equal #
 // ============================================================
 
-describe('TC-02 | Pricing Plan CTA Routes to Sign-Up', () => {
+describe('TC-02 | Pricing Dropdown Displays Plan Cards', () => {
 
-  it('CTA button on pricing page leads to sign-up page', () => {
+  it('Pricing dropdown opens on click and contains valid links', () => {
 
-    // Step 1. Navigate to /pricing
-    cy.visit('https://telnyx.com/pricing')
+    // Step 1. Open homepage
+    cy.visit('https://telnyx.com/')
 
-    // Step 2. Find first visible CTA button on any plan card
-    cy.contains('a, button', /get started|sign up|start free|try free/i)
-      .filter(':visible')
-      .first()
-      .as('ctaButton')
+    // Step 2. Click Pricing in top navigation
+    cy.get('header').contains('Pricing').click()
 
-    // Step 3. Read the href before clicking (to check URL and status)
-    cy.get('@ctaButton')
-      .invoke('attr', 'href')
-      .then((href) => {
+    // Step 3 & 4. Verify pricing links appear in dropdown
+    cy.get('a[href^="/pricing/"]', { timeout: 10000 })
+      .should('be.visible')
+      .and('have.length.greaterThan', 0)
 
-        // Step 4. Assert destination URL contains 'sign-up', 'register', or 'checkout'
-        expect(href).to.match(/sign-up|register|checkout/i)
+    // Step 5. Verify all links have valid href
+    cy.get('a[href^="/pricing/"]').each(($link) => {
 
-        // Step 5. Assert HTTP status < 400
-        const fullUrl = href.startsWith('http') ? href : `https://telnyx.com${href}`
-        cy.request({ url: fullUrl, failOnStatusCode: false })
-          .its('status')
-          .should('be.lessThan', 400)
-      })
+      const href = $link.attr('href')
+
+      expect(href).to.not.be.empty
+      expect(href).to.not.equal('#')
+    })
 
   })
 

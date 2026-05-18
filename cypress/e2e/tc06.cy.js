@@ -1,3 +1,4 @@
+
 // ============================================================
 // TC-06 | Verify Documentation Page Opens
 // ============================================================
@@ -10,7 +11,7 @@
 // 5. Verify page content is visible
 //
 // EXPECTED RESULT:
-// - URL contains developers.telnyx.com/docs/overview
+// - URL contains developers.telnyx.com
 // - Page content is visible
 // ============================================================
 
@@ -22,32 +23,25 @@ describe('TC-06 | Documentation Page Opens', () => {
     cy.visit('https://telnyx.com/')
 
     // Step 2. Click Developers in header
-    cy.get('header').contains('Developers')
-      .click({ force: true })
+    cy.get('header').contains('Developers').click({ force: true })
 
-    // Step 3. Знаходимо href посилання Dev Docs і переходимо напряму
-    // Cypress не вміє працювати з новими вкладками як Playwright
-    // Тому читаємо href і робимо cy.visit() напряму — результат той самий
+    // Step 3. Click Dev Docs link
     cy.contains('a', 'Dev Docs')
       .first()
-      .invoke('attr', 'href')
-      .then((href) => {
+      .invoke('removeAttr', 'target')
+      .click({ force: true })
 
-        // Step 4. Відкриваємо URL напряму — як новPage в Playwright
-        cy.origin(href, () => {
+    // Step 4. Verify URL contains developers.telnyx.com
+    cy.origin('https://developers.telnyx.com', () => {
 
-          // Ігноруємо React помилки їхнього сайту
-          cy.on('uncaught:exception', () => false)
+      // ігноруємо JS помилки на сторінці документації
+      cy.on('uncaught:exception', () => false)
 
-          cy.visit('https://developers.telnyx.com/docs/overview')
+      cy.url().should('include', 'developers.telnyx.com')
 
-          // Step 4. Verify URL
-          cy.url().should('include', 'developers.telnyx.com/docs/overview')
-
-          // Step 5. Verify page content is visible
-          cy.contains('APIs fundamentals').should('be.visible')
-        })
-      })
+      // Step 5. Verify page content is visible
+      cy.contains('APIs fundamentals').should('be.visible')
+    })
 
   })
 

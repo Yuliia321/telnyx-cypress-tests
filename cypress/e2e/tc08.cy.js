@@ -1,5 +1,4 @@
-// ============================================================
-// TC-08| Verify External Social Links in Footer
+// TC-08 | Verify External Social Links in Footer
 // ============================================================
 //
 // STEPS:
@@ -7,7 +6,7 @@
 // 2. Scroll to footer
 // 3. Find LinkedIn / Twitter / Facebook icons
 // 4. Verify href attributes contain valid URLs
-// 5. Verify links point to external domains (not telnyx.com)
+// 5. Verify links point to external domains
 //
 // EXPECTED RESULT:
 // - Social links contain valid URLs
@@ -24,12 +23,11 @@ describe('TC-08b | External Social Links in Footer', () => {
     // Step 2. Scroll to footer
     cy.get('footer').scrollIntoView()
 
-    // Step 3. Find social icons block
-    // Traversing: footer → знаходимо параграф "Social" → піднімаємось до parent div → спускаємось до всіх <a>
+    // Step 3. Find social icons block in footer
     cy.get('footer')
-      .contains('p', 'Social')    // знаходимо заголовок "Social"
-      .parent()                   // піднімаємось до div що містить весь соціальний блок
-      .find('ul a')               // спускаємось до посилань всередині списку
+      .contains('p', 'Social')
+      .parent()
+      .find('ul a')
 
     // Step 4. Verify there are exactly 3 social links
       .should('have.length', 3)
@@ -43,7 +41,6 @@ describe('TC-08b | External Social Links in Footer', () => {
 
         // посилання починається з https
         expect(href).to.match(/^https:\/\//)
-
 
         // відкривається в новій вкладці
         expect($link.attr('target')).to.equal('_blank')

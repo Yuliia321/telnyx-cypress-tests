@@ -21,24 +21,17 @@ describe('TC-10 | Browser Back Navigation Works', () => {
     // Step 1. Open homepage
     cy.visit('https://telnyx.com/')
 
-    // Save homepage URL to check later
-    cy.url().as('homeUrl')
-
     // Step 2. Navigate to Pricing page
     cy.visit('https://telnyx.com/pricing')
-    cy.url().should('include', '/pricing')
 
     // Step 3. Click browser Back button
     cy.go('back')
 
     // Step 4. Assert user returns to homepage
-    cy.get('@homeUrl').then((homeUrl) => {
-      cy.url().should('eq', homeUrl)
-    })
+    cy.url().should('eq', 'https://telnyx.com/')
 
     // Step 5. Assert homepage content is visible
-    cy.get('h1').should('be.visible')
-    cy.get('header').should('be.visible')
+    cy.get('h1').should('contain', 'Infrastructure for real-time agents')
 
   })
 

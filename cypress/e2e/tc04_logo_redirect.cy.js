@@ -27,7 +27,8 @@ describe('TC-04 | Header Logo Redirects to Homepage', () => {
       .click()
 
     // Step 3. Assert user is redirected to homepage
-    cy.get('h1').should('be.visible')
+  
+cy.get('h1').should('contain', 'Infrastructure for real-time agents')
 
     // Step 4. Assert URL equals main domain
     cy.url().should('match', /https:\/\/telnyx\.com\/?$/)

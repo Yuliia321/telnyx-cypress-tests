@@ -25,12 +25,12 @@ describe('TC-07 | "Talk to an Expert" Button Opens Contact Flow', () => {
     cy.contains('a, button', /talk to an expert|talk to sales|contact sales/i)
       .filter(':visible')
       .first()
-      .as('expertButton')
+      .should('be.visible')
 
-    cy.get('@expertButton').should('be.visible')
-
-    // Step 3. Click the button (open in same tab)
-    cy.get('@expertButton')
+    // Step 3. Click the button
+    cy.contains('a, button', /talk to an expert|talk to sales|contact sales/i)
+      .filter(':visible')
+      .first()
       .invoke('removeAttr', 'target')
       .click()
 
