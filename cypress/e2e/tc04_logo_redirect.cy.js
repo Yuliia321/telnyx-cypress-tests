@@ -10,7 +10,7 @@
 //
 // EXPECTED RESULT:
 // - User is redirected to homepage
-// - URL equals https://telnyx.com or https://telnyx.com/
+// - URL equals https://telnyx.com 
 // ============================================================
 
 describe('TC-04 | Header Logo Redirects to Homepage', () => {
