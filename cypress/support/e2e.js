@@ -17,3 +17,5 @@
 import './commands'
 // cypress/support/e2e.js
 
+// Ігноруємо JS помилки сторонніх сайтів
+Cypress.on('uncaught:exception', () => false)

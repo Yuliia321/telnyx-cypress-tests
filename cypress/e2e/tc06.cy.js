@@ -34,8 +34,7 @@ describe('TC-06 | Documentation Page Opens', () => {
     // Step 4. Verify URL contains developers.telnyx.com
     cy.origin('https://developers.telnyx.com', () => {
 
-      // ігноруємо JS помилки на сторінці документації
-      cy.on('uncaught:exception', () => false)
+  
 
       cy.url().should('include', 'developers.telnyx.com')
 
